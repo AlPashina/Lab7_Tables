@@ -145,6 +145,7 @@
     <ClInclude Include="TArrayTable.h" />
     <ClInclude Include="TDataCom.h" />
     <ClInclude Include="TDatValue.h" />
+    <ClInclude Include="TScanTable.h" />
     <ClInclude Include="TTable.h" />
     <ClInclude Include="TTabRecord.h" />
   </ItemGroup>

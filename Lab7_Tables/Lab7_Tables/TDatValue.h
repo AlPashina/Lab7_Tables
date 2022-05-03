@@ -1,11 +1,12 @@
 #pragma once
-#pragma once
+#include <string>
 
 class TDatValue;
 
-typedef TDatValue* PTDataValue;
+typedef TDatValue* PTDatValue;
 
 class TDatValue {
 public:
 	virtual TDatValue* GetCopy() = 0;
+	virtual std::string ToString() = 0;
 };
