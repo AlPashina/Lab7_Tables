@@ -26,9 +26,7 @@ public:
     virtual bool operator==(const TTabRecord& tr) { return Key == tr.Key; }
     virtual bool operator<(const TTabRecord& tr) { return Key < tr.Key; }
     virtual bool operator>(const TTabRecord& tr) { return Key > tr.Key; }
-    std::string ToString() override {
-
-    }
+    std::string ToString() override { }
     friend class TArrayTable;
     friend class TScanTable;
     friend class TSortTable;

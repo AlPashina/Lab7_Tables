@@ -17,6 +17,8 @@ public:
             pRecs[i] = 0;
         }
         CurPos = 0;
+		
+		DataCount = 0;//
     };
     virtual ~TArrayTable() {
         for (int i = 0; i < TabSize; i++) {
@@ -25,14 +27,15 @@ public:
         delete[]pRecs;
     };        
 
-    virtual bool IsFull() const {
+    virtual bool IsFull() const override{//int
         return DataCount >= TabSize;
     }   
     int GetTabSize() const {
         return TabSize;
     }
-    virtual PTDatValue GetValuePtr() const{ 
-        return GetValuePtr(CURRENT_POS); }
+    virtual PTDatValue GetValue() const override { 
+        return GetValue(CURRENT_POS); }
+
 	virtual TKey GetKey(TDataPos mode)const {
 		int pos = -1;
 		if (!IsEmpty()) {
@@ -51,7 +54,7 @@ public:
 		}
 		return (pos == -1) ? std::string("") : pRecs[pos]->Key;
 	}
-	virtual PTDatValue GetValuePtr(TDataPos mode) const {
+	virtual PTDatValue GetValue(TDataPos mode) const {
 		int pos = -1;
 		if (!IsEmpty()) {
 			switch (mode)
