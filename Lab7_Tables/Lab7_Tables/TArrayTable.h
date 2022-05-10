@@ -7,35 +7,37 @@ enum TDataPos { FIRST_POS, CURRENT_POS, LAST_POS };
 
 class TArrayTable : public TTable {
 protected:
-    PTTabRecord* pRecs; 
-    int TabSize;        
-    int CurPos;        
+	PTTabRecord* pRecs;
+	int TabSize;
+	int CurPos;
 public:
-    TArrayTable(int size = 100) :TabSize(size) {
-        pRecs = new PTTabRecord[TabSize];
-        for (int i = 0; i < TabSize; i++) {
-            pRecs[i] = 0;
-        }
-        CurPos = 0;
-		
-		DataCount = 0;//
-    };
-    virtual ~TArrayTable() {
-        for (int i = 0; i < TabSize; i++) {
-            delete pRecs[i];
-        }
-        delete[]pRecs;
-    };        
+	TArrayTable(int size = 100) :TabSize(size) {
+		pRecs = new PTTabRecord[TabSize];
+		for (int i = 0; i < TabSize; i++) {
+			pRecs[i] = 0;
+		}
+		CurPos = 0;
+	};
+	virtual ~TArrayTable() {
+		for (int i = 0; i < TabSize; i++) {
+			delete pRecs[i];
+		}
+		delete[]pRecs;
+	};
 
-    virtual bool IsFull() const override{//int
-        return DataCount >= TabSize;
-    }   
-    int GetTabSize() const {
-        return TabSize;
-    }
-    virtual PTDatValue GetValue() const override { 
-        return GetValue(CURRENT_POS); }
+	virtual bool IsFull() const {
+		return DataCount >= TabSize;
+	}
+	int GetTabSize() const {
+		return TabSize;
+	}
+	virtual PTDatValue GetValue() const {
+		return GetValue(CURRENT_POS);
+	}
 
+	virtual TKey GetKey()const {
+		return GetKey(CURRENT_POS);
+	}
 	virtual TKey GetKey(TDataPos mode)const {
 		int pos = -1;
 		if (!IsEmpty()) {
@@ -72,14 +74,14 @@ public:
 		}
 		return (pos == -1) ? nullptr : pRecs[pos]->pValue;
 	}
-    virtual PTDatValue FindRecord(TKey k) = 0; 
-    virtual void InsRecord(TKey k, PTDatValue pVal) = 0; 
-    virtual void DelRecord(TKey k) = 0;       
+	virtual PTDatValue FindRecord(TKey k) = 0;
+	virtual void InsRecord(TKey k, PTDatValue pVal) = 0;
+	virtual void DelRecord(TKey k) = 0;
 	bool Reset() {
 		CurPos = 0;
 		return IsTabEnded();
 	}
-    virtual bool IsTabEnded() const {
+	virtual bool IsTabEnded() const {
 		return CurPos >= TabSize;
 	}
 	bool GoNext() {
@@ -94,5 +96,5 @@ public:
 		CurPos = ((pos > -1) && (pos < DataCount)) ? pos : 0;
 		return IsTabEnded();
 	}
-    friend class TSortTable;
+	friend class TSortTable;
 };
