@@ -15,7 +15,7 @@ int main() {
 	std::cout << *t << std::endl;
 	std::cout << " *Getting table form the file* " << std::endl << std::endl;
 	std::vector<std::pair<std::string, ShoesTable*>> res;
-	CSVConverter* c = new CSVConverter("D:/Алина/Рабочий стол/Shoes2.csv");
+	CSVConverter* c = new CSVConverter("../Shoes2.csv");
 	res = c->Convert();
 	for (int i = 0; i < res.size(); i++) {
 		t->InsRecord(res[i].first, res[i].second);
