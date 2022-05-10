@@ -142,6 +142,8 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CSVConverter.h" />
+    <ClInclude Include="ShoesTable.h" />
     <ClInclude Include="TArrayTable.h" />
     <ClInclude Include="TDataCom.h" />
     <ClInclude Include="TDatValue.h" />
