@@ -44,5 +44,8 @@
     <ClInclude Include="CSVConverter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="TSortTable.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

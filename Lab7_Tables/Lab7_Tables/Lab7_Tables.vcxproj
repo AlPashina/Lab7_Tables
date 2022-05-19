@@ -148,6 +148,7 @@
     <ClInclude Include="TDataCom.h" />
     <ClInclude Include="TDatValue.h" />
     <ClInclude Include="TScanTable.h" />
+    <ClInclude Include="TSortTable.h" />
     <ClInclude Include="TTable.h" />
     <ClInclude Include="TTabRecord.h" />
   </ItemGroup>
