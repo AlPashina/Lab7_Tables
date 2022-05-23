@@ -2,7 +2,7 @@
 #include "TArrayTable.h"
 #include "TScanTable.h"
 
-enum TSortMethod { INSERT, MERGE, QUIQ };
+enum TSortMethod {  INSERT, MERGE,QUIQ };
 class  TSortTable : public TScanTable {
 protected:
     TSortMethod SortMethod;
@@ -57,8 +57,27 @@ protected:
         MergeData(pData, pBuff, n1, n2);
     }
 
-    void MergeData(PTTabRecord*& pData, PTTabRecord*& pBuff, int n1, int n2);
+    void MergeData(PTTabRecord*& pData, PTTabRecord*& pBuff, int n1, int n2) {
+        int i = 0, i1 = 0, i2 = 0;
+        PTTabRecord* pDat1 = pData;
+        PTTabRecord* pDat2 = pData + n1;
+        while (i1 < n1 && i2 < n2) {
+            if ((pDat1[i1]->Key) < (pDat2[i2]->Key))
+                pBuff[i++] = pDat1[i1++];
+            else
+                pBuff[i++] = pDat2[i2++];
+        }
+        while (i1 < n1) pBuff[i++] = pDat1[i1++];
+        while (i2 < n2) pBuff[i++] = pDat2[i2++];
+        for (int j = 0; j < i; j++)
+            pData[j] = pBuff[j];
+        for (int j = 0; j < i; j++)
+            pBuff[j] = pDat1[j];
+        Efficiency += n1 + n2;
+    }
 
+
+    //
     void QuickSort(PTTabRecord* pMem, int DataCount)//
     {
         int pivot;
@@ -93,73 +112,12 @@ protected:
         pivot = i2;
         Efficiency += size;
     }
-
-    /*
-
-
-    void TSortTable::QuickSplit(PTTabRecord *pData, int size, int &Pivot)
-    {
-        PTTabRecord pPivot = pData[0], pTemp;
-        int i1 = 1, i2 = size - 1;
-        while (i1 <= i2)
-        {
-            while ((i1<size) && !(pData[i1]->Key > pPivot->Key)) i1++;
-            while (pData[i2]->Key > pPivot->Key) i2--;
-            if (i1<i2)
-            {
-                pTemp = pData[i1];
-                pData[i1] = pData[i2];
-                pData[i2] = pTemp;
-            }
-        }
-        pData[0] = pData[i2];
-        pData[i2] = pPivot;
-        Pivot = i2;
-        Efficiency += size;
-    }
-     7
-    src/TTabRecord.cpp
-
-    */
-
-
-
-    /*
-    void TSortTable::QuickSort(PTTabRecord* pRecs, int DataCount) {
-    if (DataCount == 0)
-        return;
-    QuickSplit(pRecs, 0, DataCount - 1);
-}
-
-   void TSortTable::QuickSplit(PTTabRecord* pData, int l, int r) {
-    if (l == r)
-        return;
-    TTabRecord pivot = *pData[(l + r) / 2];
-    int i = l, j = r;
-    while (i <= j) {
-        while (*pData[i] < pivot)
-            ++i;
-        while (*pData[j] > pivot)
-            --j;
-        if (i <= j) {
-            TTabRecord tmp = *pData[i];
-            *pData[i] = *pData[j];
-            *pData[j] = tmp;
-            ++i, --j;
-        }
-    }
-    Efficiency += r - l;
-    QuickSplit(pData, l, i - 1);
-    QuickSplit(pData, i, r);
-}
-
-    */
-
+    //
 public:
     TSortTable(int Size = 20) : TScanTable(Size) {};
     TSortTable(const TScanTable& tab) {
         *this = tab;
-        this->SortData();
+        //        this->SortData();
     }
 
     TSortTable& operator=(const TScanTable& tab) {
@@ -202,13 +160,42 @@ public:
         if (i2 < 0 || pRecs[i2]->GetKey() < key)
             i2++;
         CurPos = i2;
-        if (pRecs[i2]->GetKey() == key && i2 < DataCount) {
+        if (i2 < DataCount&& pRecs[i2]->GetKey() == key) {
             SetRetCode(TabOK);
             return pRecs[i2]->GetValue();
         }
         SetRetCode(TabNoRecord);
         return nullptr;
     }
-    virtual void InsRecord(TKey k, PTDatValue pVal);
-    virtual void DelRecord(TKey k);
+    virtual void InsRecord(TKey k, PTDatValue pVal) {
+        if (IsFull()) {
+            SetRetCode(TabFull);
+        }
+        else {
+            PTDatValue temp = FindRecord(k);//
+            if (temp != nullptr)
+                SetRetCode(TabRecDbl);
+            else {
+                for (int i = DataCount; i > CurPos; i--)
+                    pRecs[i] = pRecs[i - 1];
+                pRecs[CurPos] = new TTabRecord(k, pVal);
+                DataCount++;
+                SetRetCode(TabOK);
+            }
+        }
+    }
+
+    virtual void DelRecord(TKey k) {
+
+        PTDatValue temp = FindRecord(k);
+        if (temp == nullptr)
+            SetRetCode(TabNoRecord);
+        else {
+            for (int i = CurPos; i < DataCount - 1; i++)//--; i++)
+                pRecs[i] = pRecs[i + 1];
+            pRecs[--DataCount] = nullptr;
+            SetRetCode(TabOK);
+        }
+    }
+
 };

@@ -1,4 +1,3 @@
 ﻿  Source.cpp
-D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Lab7_Tables\Source.cpp(20,20): warning C4018: <: несоответствие типов со знаком и без знака
-  LINK : не найден или не выполнена сборка D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Debug\Lab7_Tables.exe при последней инкрементной компоновке; выполняется полная компоновка
+D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Lab7_Tables\Source.cpp(21,20): warning C4018: <: несоответствие типов со знаком и без знака
   Lab7_Tables.vcxproj -> D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Debug\Lab7_Tables.exe
