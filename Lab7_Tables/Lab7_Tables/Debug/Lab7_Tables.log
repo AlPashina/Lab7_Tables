@@ -1,3 +1,7 @@
-﻿  Source.cpp
-D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Lab7_Tables\Source.cpp(21,20): warning C4018: <: несоответствие типов со знаком и без знака
+﻿  TArrayTable.cpp
+  TListHashTable.cpp
+D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Lab7_Tables\THashTable.h(14,10): warning C4244: return: преобразование "uint64_t" в "uint32_t", возможна потеря данных
+  TScanTable.cpp
+  TSortTable.cpp
+  Создание кода...
   Lab7_Tables.vcxproj -> D:\Алина\Документы\GitHub\Lab7_Tables\Lab7_Tables\Debug\Lab7_Tables.exe

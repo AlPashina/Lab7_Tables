@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CSVConverter.h" />
+    <ClInclude Include="ShoesRecord.h" />
+    <ClInclude Include="ShoesTable.h" />
+    <ClInclude Include="TArrayTable.h" />
+    <ClInclude Include="TDataCom.h" />
+    <ClInclude Include="TDatValue.h" />
+    <ClInclude Include="THashTable.h" />
+    <ClInclude Include="TListHashTable.h" />
+    <ClInclude Include="TScanTable.h" />
+    <ClInclude Include="TSortTable.h" />
+    <ClInclude Include="TTable.h" />
+    <ClInclude Include="TTabRecord.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TArrayTable.cpp" />
+    <ClCompile Include="TListHashTable.cpp" />
+    <ClCompile Include="TScanTable.cpp" />
+    <ClCompile Include="TSortTable.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,20 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CSVConverter.h" />
-    <ClInclude Include="ShoesTable.h" />
-    <ClInclude Include="TArrayTable.h" />
-    <ClInclude Include="TDataCom.h" />
-    <ClInclude Include="TDatValue.h" />
-    <ClInclude Include="TScanTable.h" />
-    <ClInclude Include="TSortTable.h" />
-    <ClInclude Include="TTable.h" />
-    <ClInclude Include="TTabRecord.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
